@@ -1,0 +1,2 @@
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-color:grey}#game,#menu{display:flex;flex-direction:column;align-items:center}#menu>.title{font-size:5em;color:red}#menu>.toolbar{display:flex;flex-direction:row;align-items:baseline}#menu>.toolbar>*{margin:1em}
+/*# sourceMappingURL=main.2ab33226.chunk.css.map */

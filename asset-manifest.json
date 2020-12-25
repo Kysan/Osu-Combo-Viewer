@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Osu-Combo-Viewer/static/css/main.2ab33226.chunk.css",
+    "main.js": "/Osu-Combo-Viewer/static/js/main.70886bb7.chunk.js",
+    "main.js.map": "/Osu-Combo-Viewer/static/js/main.70886bb7.chunk.js.map",
+    "runtime-main.js": "/Osu-Combo-Viewer/static/js/runtime-main.afb0d15d.js",
+    "runtime-main.js.map": "/Osu-Combo-Viewer/static/js/runtime-main.afb0d15d.js.map",
+    "static/js/2.d2962266.chunk.js": "/Osu-Combo-Viewer/static/js/2.d2962266.chunk.js",
+    "static/js/2.d2962266.chunk.js.map": "/Osu-Combo-Viewer/static/js/2.d2962266.chunk.js.map",
+    "index.html": "/Osu-Combo-Viewer/index.html",
+    "static/css/main.2ab33226.chunk.css.map": "/Osu-Combo-Viewer/static/css/main.2ab33226.chunk.css.map",
+    "static/js/2.d2962266.chunk.js.LICENSE.txt": "/Osu-Combo-Viewer/static/js/2.d2962266.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.afb0d15d.js",
+    "static/js/2.d2962266.chunk.js",
+    "static/css/main.2ab33226.chunk.css",
+    "static/js/main.70886bb7.chunk.js"
+  ]
+}
