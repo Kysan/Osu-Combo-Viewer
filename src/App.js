@@ -5,18 +5,27 @@ import { Stage, Sprite, PixiComponent } from "@inlet/react-pixi";
 import GameNote from "./components/GameNote";
 import MapToApp from "./Utils/MapParser";
 
+// range(-10, 10, 1) <=>
+const IQ = Array.from(Array(314).keys())
+  .map((e) => -e)
+  .reverse()
+  .concat(Array.from(Array(314).keys()));
+
 class App extends Component {
   state = {
     position: { x: 0, y: 0 },
     fileData: "",
     currentCombo: 0,
     map: [
-      [
-        { x: 150, y: 150 },
-        { x: 450, y: 450 },
-        { x: 600, y: 600 },
-      ],
+      IQ.map((p, index) => {
+        return {
+          x: Math.cos(p / 100) * 100 + 200,
+          y: Math.sin(p / 100) * 100 + 200,
+          value: ++index,
+        };
+      }),
     ],
+    mouse: {},
   };
 
   componentDidMount() {
@@ -35,7 +44,9 @@ class App extends Component {
       this.setState({ currentCombo: currentCombo - 1 });
     }
   };
-
+  handleMouse = (event) => {
+    // console.log(event);
+  };
   handleFileLoad = ({ target: fileSelector }) => {
     let file = fileSelector.files[0];
     let reader = new FileReader();
@@ -44,7 +55,10 @@ class App extends Component {
 
     reader.onload = () => {
       console.log(MapToApp(reader.result));
-      this.setState({ map: MapToApp(reader.result) });
+      this.setState({
+        map: MapToApp(reader.result),
+        fileData: reader.result.replace(" ", "<\br>"),
+      });
     };
 
     reader.onerror = function () {
@@ -61,6 +75,8 @@ class App extends Component {
 
     height = (3 / 4) * width;
 
+    let circleSize = height / 10;
+
     let { map, currentCombo } = this.state;
 
     return (
@@ -68,30 +84,50 @@ class App extends Component {
         <div id="menu">
           <h1 className="title"> Osu Combo Visualizer</h1>
           <div className="toolbar">
-            <span>Choisez une map</span>
-            <input type="file" onChange={this.handleFileLoad} title="Ouvrir" />
+            <span>Choisisez une map</span>
+            <input
+              type="file"
+              onChange={this.handleFileLoad}
+              title="Ouvrir"
+              accept=".osu"
+            />
+            <span>
+              Combo n°{currentCombo + 1}/{map.length}
+            </span>
+            <span>
+              Utilisez les flèches gauche et droite pour naviguer entre les
+              pages de combos ou alors (Q) et (D)
+            </span>
           </div>
         </div>
 
-        <Stage width={width} height={height}>
+        <Stage width={width} height={height} onPointerMove={this.handleMouse}>
           {map[currentCombo].reverse().map((note, number) => {
-            let { x, y } = note; // je pouvais faire {...note} (je sais)
+            let { x, y, type, value } = note; // je pouvais faire {...note} (je sais)
             //  x (Integer) va de 0 à 512 (inclusif) et y (Integer) va de 0 à 384 (inclusif).
-            x = x * (width / 512) - 100;
-            y = y * (height / 384) - 100;
-
+            x = (x * width) / 512 - 100;
+            y = (y * height) / 384 - 100;
+            let text = value;
+            if (type === "slider") {
+              text += "(s)";
+            } else if (type === "spiner") {
+              text = "spiner";
+            }
             return (
               <GameNote
                 x={x}
                 y={y}
-                radius={100}
+                radius={circleSize}
                 key={number}
-                text={number + 1}
+                text={text}
               />
             );
           })}
         </Stage>
-        <div id="debug">{this.state.fileData}</div>
+        <div id="debug">
+          <h2>debug:</h2>
+          {this.state.fileData}
+        </div>
       </div>
     );
   }

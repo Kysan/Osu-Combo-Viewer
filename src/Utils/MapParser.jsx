@@ -9,7 +9,8 @@ function MapToApp(osuFileData) {
   // * pas le meilleur algo mais plus simple à lire
   let combos = [];
   let currentCombo = [];
-
+  let totalCounter = 0;
+  let localCounter = 1;
   beatmap.hitObjects.forEach((hitObject) => {
     let {
       objectName,
@@ -19,13 +20,19 @@ function MapToApp(osuFileData) {
     if (newCombo) {
       combos.push([...currentCombo]);
       currentCombo = [];
+      localCounter = 1;
     }
 
     let object = {
       x,
       y,
       type: objectName,
+      value: localCounter,
+      id: totalCounter,
     };
+    console.log("loading: ", object);
+    totalCounter += 1;
+    localCounter += 1;
 
     currentCombo.push(object);
   });
