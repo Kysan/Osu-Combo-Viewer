@@ -1,4 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# test
+
+osu-parser-test/node_modules
+
+
 
 # dependencies
 /node_modules
