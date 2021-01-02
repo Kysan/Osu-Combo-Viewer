@@ -11,12 +11,14 @@ function MapToApp(osuFileData) {
   let currentCombo = [];
   let totalCounter = 0;
   let localCounter = 1;
+
   beatmap.hitObjects.forEach((hitObject) => {
     let {
-      objectName,
+      objectName: type,
       newCombo,
       position: [x, y],
     } = hitObject;
+
     if (newCombo) {
       combos.push([...currentCombo]);
       currentCombo = [];
@@ -26,10 +28,15 @@ function MapToApp(osuFileData) {
     let object = {
       x,
       y,
-      type: objectName,
+      type,
       value: localCounter,
       id: totalCounter,
     };
+
+    if ((object.type = "slider")) {
+      object = { ...object, hitObject.curveType, hitObject.points };
+    }
+
     console.log("loading: ", object);
     totalCounter += 1;
     localCounter += 1;

@@ -22,7 +22,7 @@ const customCircle = PixiComponent("customCircle", {
   },
 });
 
-const GameNote = ({ x, y, radius, color, text }) => {
+const Circle = ({ x, y, radius, color, text }) => {
   const style = new TextStyle({
     align: "center",
     fill: "#000bff",
@@ -51,4 +51,4 @@ const GameNote = ({ x, y, radius, color, text }) => {
   );
 };
 
-export default withPixiApp(GameNote);
+export default withPixiApp(Circle);
